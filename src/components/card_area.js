@@ -11,8 +11,6 @@ class CardArea extends Component {
 
 		this.state={
 			cards: [],
-			click1: false,
-			click2: false,
 			card1: '',
 			card2: ''
 		}
@@ -34,23 +32,19 @@ class CardArea extends Component {
 		if(this.lastClicked === e.target.name || e.target.name === undefined){
 			return;
 		}
-		if(!this.state.click1){
+		if(!this.state.card1){
 			this.lastClicked = e.target.name;
 			this.setState({
-				click1: true,
 				card1: e.target.name
 			})
 			return;
 		}
-		if(!this.state.click2){
+		if(!this.state.card2){
 			this.setState({
-				click2: true,
 				card2: e.target.name
 			})
 			this.lastClicked = null;
 			setTimeout(()=>{this.setState({
-				click1: false,
-				click2: false,
 				card1: '',
 				card2: ''
 			})}, 1500)
@@ -67,7 +61,8 @@ class CardArea extends Component {
 						{this.state.click1 && (this.state.card1 === {temp} || this.state.card2 === {temp})? '' : <img name = {temp} src = {cardBack}/>}
 					</div>
 					<div className = 'portal'>
-						<img src = {this.state.click1 && this.state.card1 === {temp} ? bluePortal : orangePortal}/>
+						<img src = {bluePortal} className = {this.state.card1 === {temp} ? '' : 'hidden'}/>
+						<img src = {orangePortal} className = {this.state.card1 === {temp} ? 'hidden' : ''}/>
 					</div>
 					<div className = 'back'>
 						<img className = 'card-img' src = {this.state.cards[i]}/>
@@ -77,19 +72,23 @@ class CardArea extends Component {
 			)
 			arr.push(element)
 		}
+		this.setState({
+
+		})
 	}
 	
 
 	render() {
-
+		console.log(this.state)
 		return (
 			<div className="game-cont">
 				<div onClick = {this.handleClick.bind(this)} name = "card1" className = ' single-card-cont'>
 					<div className = 'front'>
-						{this.state.click1 && (this.state.card1 === 'card1' || this.state.card2 === 'card1')? '' : <img name = "card1" src = {cardBack}/>}
+						{this.state.card1 === 'card1' || this.state.card2 === 'card1' ? '' : <img name = "card1" src = {cardBack}/>}
 					</div>
 					<div className = 'portal'>
-						<img src = {this.state.click1 && this.state.card1 === 'card1' ? bluePortal : orangePortal}/>
+						<img src = {orangePortal} className = {this.state.card2 === 'card1' ? '' : 'hidden'}/>
+						<img src = {bluePortal} className = {this.state.card1 === 'card1' ? '' : 'hidden'}/>
 					</div>
 					<div className = 'back'>
 						<img className = 'card-img' src = {this.state.cards[0]}/>
@@ -98,10 +97,11 @@ class CardArea extends Component {
 				</div>
 				<div onClick = {this.handleClick.bind(this)} name = "card2" className = ' single-card-cont'>
 					<div className = 'front'>
-						{this.state.click1 && (this.state.card1 === 'card2' || this.state.card2 === 'card2')? '' : <img name = "card2" src = {cardBack}/>}
+						{this.state.card1 === 'card2' || this.state.card2 === 'card2' ? '' : <img name = "card2" src = {cardBack}/>}
 					</div>
 					<div className = 'portal'>
-						<img src = {this.state.click1 && this.state.card1 === 'card2' ? bluePortal : orangePortal}/>
+						<img src = {orangePortal} className = {this.state.card2 === 'card2' ? '' : 'hidden'}/>
+						<img src = {bluePortal} className = {this.state.card1 === 'card2' ? '' : 'hidden'}/>
 					</div>
 					<div className = 'back'>
 						<img className = 'card-img' src = {this.state.cards[1]}/>

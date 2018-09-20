@@ -17,3 +17,6 @@ html, body {
 	position: relative;
 	left: 15%;
 }
+.hidden {
+	display: none;
+}
