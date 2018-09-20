@@ -7,43 +7,27 @@ import orangePortal from '../assets/images/backgrounds/backwithorangeportal.png'
 class SingleCard extends Component {
 	constructor(props){
 		super(props)
-		this.state ={
-			click1: false,
-			click2: false
+		this.state={
+			card1: '',
+			card2: ''
 		}
 	}
-
-	componentDidMount() {
-		console.log(this.props)
+	handleCallback(e){
+		this.props.callBack(e);
 	}
-	// handleClick(){
-	// 	if(!this.state.click1){
-	// 		this.setState({
-	// 			click1: true
-	// 		})
-	// 		return;
-	// 	}
-	// 	this.setState({
-	// 		click1: false,
-	// 		click2: true
-	// 	})
-	// }
-	handleClick(){
-		this.props.click();
-	}
+	
+	
 
 	render() {
-		const {url} = this.props
+		const {url, id} = this.props
 		return (
-			<div onClick = {this.handleClick.bind(this)} className = "single-card-cont">
+			<div onClick = {this.handleCallback.bind(this)} name = "card1" className = ' single-card-cont'>
 				<div className = 'front'>
-					{this.props.click1 ? '' : <img src = {cardBack}/>}
+					{this.props.card1 === id || this.props.card2 === id ? '' : <img name = {id} src = {cardBack}/>}
 				</div>
 				<div className = 'portal'>
-					{this.props.click1 ? this.props.click2 ? '' : <img src = {bluePortal}/> : ''}
-				</div>
-				<div className = 'portal'>
-					{this.props.click2 ? <img src = {orangePortal}/> : ''}
+					<img src = {orangePortal} className = {this.props.card2 === id ? '' : 'hidden'}/>
+					<img src = {bluePortal} className = {this.props.card1 === id ? '' : 'hidden'}/>
 				</div>
 				<div className = 'back'>
 					<img className = 'card-img' src = {url}/>

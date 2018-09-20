@@ -12,23 +12,31 @@ class CardArea extends Component {
 		this.state={
 			cards: [],
 			card1: '',
-			card2: ''
+			card2: '',
+			domElements: []
 		}
 		this.lastClicked;
 		this.cardArray = [];
+		this.flag = false; //flag that will make cards rerender on dom when selected
 	}
 	componentDidMount() {
 		const images = this.importAll(require.context('../assets/images/cards', false, /\.(png|jpe?g|svg)$/));
 		this.setState({
 			cards: images
-		})
+		}, this.buildDomElements(images))
+		this.dupAndShuffle(images)
 	}
 	importAll(r) {
   		return r.keys().map(r);
 	}
-
+	dupAndShuffle(array){
+		let copy = [];
+		for(let i = 0; i<array.length*2; i++){
+			copy[i] = array[i<9 ? i : i-9]
+		}
+		console.log(copy)
+	}
 	handleClick(e){
-		console.log(e.target.name)
 		if(this.lastClicked === e.target.name || e.target.name === undefined){
 			return;
 		}
@@ -37,77 +45,49 @@ class CardArea extends Component {
 			this.setState({
 				card1: e.target.name
 			})
+			this.flag = true;
 			return;
 		}
 		if(!this.state.card2){
 			this.setState({
 				card2: e.target.name
 			})
+			this.flag = true;
 			this.lastClicked = null;
-			setTimeout(()=>{this.setState({
-				card1: '',
-				card2: ''
+			setTimeout(()=>{
+				this.flag = true;
+				this.setState({
+					card1: '',
+					card2: ''
 			})}, 1500)
 			return;
 		}
 	}
-	buildArray(){
-		let arr = [];
-		for(let i = 0; i< this.state.cards; i++){
-			let temp = 'card' + i;
-			let element = (
-				<div onClick = {this.handleClick.bind(this)} name = {temp} className = ' single-card-cont'>
-					<div className = 'front'>
-						{this.state.click1 && (this.state.card1 === {temp} || this.state.card2 === {temp})? '' : <img name = {temp} src = {cardBack}/>}
-					</div>
-					<div className = 'portal'>
-						<img src = {bluePortal} className = {this.state.card1 === {temp} ? '' : 'hidden'}/>
-						<img src = {orangePortal} className = {this.state.card1 === {temp} ? 'hidden' : ''}/>
-					</div>
-					<div className = 'back'>
-						<img className = 'card-img' src = {this.state.cards[i]}/>
-						<div className = 'background-div grey lighten-2'></div>
-					</div>
-				</div>
-			)
-			arr.push(element)
+
+	componentDidUpdate(prevProps, prevState) {
+		if(this.flag){
+			this.buildDomElements(this.state.cards)
+		}
+	}
+
+	buildDomElements(array){
+		let arr =[];
+		for(let i = 0; i< array.length; i++){
+			let id = 'card' + (i + 1);
+			let temp = <SingleCard key = {i} id = {id} card1 = {this.state.card1} card2 = {this.state.card2} url = {this.state.cards[i]} callBack = {this.handleClick.bind(this)}/>
+			arr.push(temp)
 		}
 		this.setState({
-
+			domElements: arr
 		})
+		this.flag = false;
 	}
 	
 
 	render() {
-		console.log(this.state)
 		return (
 			<div className="game-cont">
-				<div onClick = {this.handleClick.bind(this)} name = "card1" className = ' single-card-cont'>
-					<div className = 'front'>
-						{this.state.card1 === 'card1' || this.state.card2 === 'card1' ? '' : <img name = "card1" src = {cardBack}/>}
-					</div>
-					<div className = 'portal'>
-						<img src = {orangePortal} className = {this.state.card2 === 'card1' ? '' : 'hidden'}/>
-						<img src = {bluePortal} className = {this.state.card1 === 'card1' ? '' : 'hidden'}/>
-					</div>
-					<div className = 'back'>
-						<img className = 'card-img' src = {this.state.cards[0]}/>
-						<div className = 'background-div grey lighten-2'></div>
-					</div>
-				</div>
-				<div onClick = {this.handleClick.bind(this)} name = "card2" className = ' single-card-cont'>
-					<div className = 'front'>
-						{this.state.card1 === 'card2' || this.state.card2 === 'card2' ? '' : <img name = "card2" src = {cardBack}/>}
-					</div>
-					<div className = 'portal'>
-						<img src = {orangePortal} className = {this.state.card2 === 'card2' ? '' : 'hidden'}/>
-						<img src = {bluePortal} className = {this.state.card1 === 'card2' ? '' : 'hidden'}/>
-					</div>
-					<div className = 'back'>
-						<img className = 'card-img' src = {this.state.cards[1]}/>
-						<div className = 'background-div grey lighten-2'></div>
-					</div>
-				</div>
+				{this.state.domElements}
 			</div>
 		);
 	}
