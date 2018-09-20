@@ -1,0 +1,19 @@
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  font-size: 0;
+}
+.main-cont {
+	height: 100vh;
+}
+.main-logo{
+	font-size: 3.5vmax;
+}
+.game-cont{
+	height:	80%;
+	width: 70%;
+	border: 1px solid red;
+	position: relative;
+	left: 15%;
+}

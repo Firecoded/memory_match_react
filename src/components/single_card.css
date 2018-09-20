@@ -1,0 +1,47 @@
+.single-card-cont{
+	position: relative;
+    width: 16.6666%;
+    height: 33%;
+    display: inline-block;
+    /*background-color: red;*/
+    border: 1px solid red;
+    z-index: 4;
+}
+.front, .back, .portal {
+	position: absolute;
+    width: 85%;
+    height: 90%;
+    margin: 6%;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid blue;
+}
+.front {
+	z-index: 2;
+}
+.portal {
+	z-index: 1;
+}
+.card-img{
+	max-width: 100%;
+	max-height: 100%;
+	position: absolute;	
+	left: 0;
+	z-index: -1;
+}
+.background-div {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	display: inline-block;
+	left: 0;
+    z-index: -2;
+}
+
+.front img, .portal img, .portal img {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	z-index: inherit;
+}
