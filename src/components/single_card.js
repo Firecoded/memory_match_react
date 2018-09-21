@@ -19,11 +19,12 @@ class SingleCard extends Component {
 	
 
 	render() {
-		const {url, id} = this.props
+		console.log(this.props)
+		const {url, id, isMatched} = this.props
 		return (
-			<div onClick = {this.handleCallback.bind(this)} name = "card1" className = ' single-card-cont'>
+			<div onClick = {this.handleCallback.bind(this)} name = {id} className = ' single-card-cont'>
 				<div className = 'front'>
-					{this.props.card1 === id || this.props.card2 === id ? '' : <img name = {id} src = {cardBack}/>}
+					{this.props.card1 === id || this.props.card2 === id ? '' : isMatched ? '' : <img name = {id} src = {cardBack}/>}
 				</div>
 				<div className = 'portal'>
 					<img src = {orangePortal} className = {this.props.card2 === id ? '' : 'hidden'}/>
