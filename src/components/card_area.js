@@ -15,16 +15,16 @@ class CardArea extends Component {
 			card2: '',
 			domElements: []
 		}
+		this.checkMatchObj = {};
 		this.lastClicked;
-		this.cardArray = [];
 		this.flag = false; //flag that will make cards rerender on dom when selected
 	}
 	componentDidMount() {
-		const images = this.importAll(require.context('../assets/images/cards', false, /\.(png|jpe?g|svg)$/));
+		let images = this.importAll(require.context('../assets/images/cards', false, /\.(png|jpe?g|svg)$/));
+		let imagesDoubled = this.dupAndShuffle(images);
 		this.setState({
-			cards: images
-		}, this.buildDomElements(images))
-		this.dupAndShuffle(images)
+			cards: imagesDoubled
+		}, this.buildDomElements(imagesDoubled))
 	}
 	importAll(r) {
   		return r.keys().map(r);
@@ -34,34 +34,43 @@ class CardArea extends Component {
 		for(let i = 0; i<array.length*2; i++){
 			copy[i] = array[i<9 ? i : i-9]
 		}
-		console.log(copy)
+		let shuffled = [];
+		for(let i = 0; i < 18; i++){
+			let randNum = Math.floor(Math.random() * copy.length)
+			let ranUrl = copy[randNum];
+			this.checkMatchObj['card' + (i+1)] = ranUrl;
+			shuffled.push(ranUrl);
+			copy.splice(randNum, 1)
+		}
+		return shuffled;
 	}
 	handleClick(e){
-		if(this.lastClicked === e.target.name || e.target.name === undefined){
-			return;
-		}
+		if(this.lastClicked === e.target.name || e.target.name === undefined) return;
 		if(!this.state.card1){
 			this.lastClicked = e.target.name;
-			this.setState({
-				card1: e.target.name
-			})
+			this.setState({card1: e.target.name});
 			this.flag = true;
 			return;
 		}
 		if(!this.state.card2){
-			this.setState({
-				card2: e.target.name
-			})
-			this.flag = true;
+			this.setState({card2: e.target.name})
+			this.checkWinOrSwitch(this.lastClicked, e.target.name)
 			this.lastClicked = null;
-			setTimeout(()=>{
-				this.flag = true;
-				this.setState({
-					card1: '',
-					card2: ''
-			})}, 1500)
 			return;
 		}
+	}
+	checkWinOrSwitch(card1, card2){
+		this.flag = true;
+		if(this.checkMatchObj[card1] === this.checkMatchObj[card2]){
+			this.checkMatchObj[card1] = null;
+			this.checkMatchObj[card2] = null;
+		}
+		setTimeout(()=>{
+			this.flag = true;
+			this.setState({
+				card1: '',
+				card2: ''
+		})}, 1500)
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -74,7 +83,7 @@ class CardArea extends Component {
 		let arr =[];
 		for(let i = 0; i< array.length; i++){
 			let id = 'card' + (i + 1);
-			let temp = <SingleCard key = {i} id = {id} card1 = {this.state.card1} card2 = {this.state.card2} url = {this.state.cards[i]} callBack = {this.handleClick.bind(this)}/>
+			let temp = <SingleCard isMatched = {this.checkMatchObj[id] ? false : true} key = {i} id = {id} card1 = {this.state.card1} card2 = {this.state.card2} url = {this.state.cards[i]} callBack = {this.handleClick.bind(this)}/>
 			arr.push(temp)
 		}
 		this.setState({
