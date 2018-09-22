@@ -19,7 +19,6 @@ class SingleCard extends Component {
 	
 
 	render() {
-		console.log(this.props)
 		const {url, id, isMatched} = this.props
 		return (
 			<div onClick = {this.handleCallback.bind(this)} name = {id} className = ' single-card-cont'>
@@ -31,7 +30,7 @@ class SingleCard extends Component {
 					<img src = {bluePortal} className = {this.props.card1 === id ? '' : 'hidden'}/>
 				</div>
 				<div className = 'back'>
-					<img className = 'card-img' src = {url}/>
+					<img className = 'card-img' id = {id} src = {url}/>
 					<div className = 'background-div grey lighten-2'></div>
 				</div>
 			</div>

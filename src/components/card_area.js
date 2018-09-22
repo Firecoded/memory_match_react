@@ -38,7 +38,7 @@ class CardArea extends Component {
 		for(let i = 0; i < 18; i++){
 			let randNum = Math.floor(Math.random() * copy.length)
 			let ranUrl = copy[randNum];
-			this.checkMatchObj['card' + (i+1)] = ranUrl;
+			this.checkMatchObj['card' + i] = ranUrl;
 			shuffled.push(ranUrl);
 			copy.splice(randNum, 1)
 		}
@@ -61,16 +61,36 @@ class CardArea extends Component {
 	}
 	checkWinOrSwitch(card1, card2){
 		this.flag = true;
-		if(this.checkMatchObj[card1] === this.checkMatchObj[card2]){
+		if(this.checkMatchObj[card1] === this.checkMatchObj[card2]){ // checks for a match, if they match portal disappears
 			this.checkMatchObj[card1] = null;
 			this.checkMatchObj[card2] = null;
+			this.flag = true;
+		} else {
+			setTimeout(()=>{
+			console.log(card1, card2, this.checkMatchObj)
+				let urlSave = this.checkMatchObj[card1]
+				this.checkMatchObj[card1] = this.checkMatchObj[card2]; //switches cards if not a match
+				this.checkMatchObj[card2] = urlSave;
+				let cardArray = this.state.cards
+				let card1Index = card1.split('card');
+				card1Index = card1Index[1];
+				let card2Index = card2.split('card');
+				card2Index = card2Index[1];
+				let cardSave = cardArray[card1Index];
+				cardArray[card1Index] = this.state.cards[card2Index];
+				cardArray[card2Index] = cardSave;
+				document.getElementById('' + card1).classList.add('appear');
+				document.getElementById('' + card2).classList.add('appear');
+				this.flag = true;
+				this.setState({cards: cardArray})
+			}, 800)	
 		}
 		setTimeout(()=>{
 			this.flag = true;
 			this.setState({
 				card1: '',
 				card2: ''
-		})}, 1500)
+		})}, 1600)
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -82,8 +102,16 @@ class CardArea extends Component {
 	buildDomElements(array){
 		let arr =[];
 		for(let i = 0; i< array.length; i++){
-			let id = 'card' + (i + 1);
-			let temp = <SingleCard isMatched = {this.checkMatchObj[id] ? false : true} key = {i} id = {id} card1 = {this.state.card1} card2 = {this.state.card2} url = {this.state.cards[i]} callBack = {this.handleClick.bind(this)}/>
+			let id = 'card' + i ;
+			let temp = <SingleCard 
+				isMatched = {this.checkMatchObj[id] ? false : true} 
+				key = {i} 
+				id = {id} 
+				card1 = {this.state.card1} 
+				card2 = {this.state.card2} 
+				url = {this.state.cards[i]} 
+				callBack = {this.handleClick.bind(this)}
+				/>
 			arr.push(temp)
 		}
 		this.setState({
