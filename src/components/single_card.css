@@ -46,9 +46,11 @@
 	z-index: inherit;
 }
 .appear {
-	animation: .7s appear 1 0s linear;
+	animation: .6s appear 1 0s linear;
+
 }
 @keyframes appear {
 	0% {opacity: 0;}
 	100% {opacity: 1}
 }
+

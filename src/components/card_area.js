@@ -67,7 +67,6 @@ class CardArea extends Component {
 			this.flag = true;
 		} else {
 			setTimeout(()=>{
-			console.log(card1, card2, this.checkMatchObj)
 				let urlSave = this.checkMatchObj[card1]
 				this.checkMatchObj[card1] = this.checkMatchObj[card2]; //switches cards if not a match
 				this.checkMatchObj[card2] = urlSave;
@@ -79,8 +78,8 @@ class CardArea extends Component {
 				let cardSave = cardArray[card1Index];
 				cardArray[card1Index] = this.state.cards[card2Index];
 				cardArray[card2Index] = cardSave;
-				document.getElementById('' + card1).classList.add('appear');
-				document.getElementById('' + card2).classList.add('appear');
+				document.getElementById(card1).classList.add('appear');
+				document.getElementById(card2).classList.add('appear');
 				this.flag = true;
 				this.setState({cards: cardArray})
 			}, 800)	
@@ -90,7 +89,11 @@ class CardArea extends Component {
 			this.setState({
 				card1: '',
 				card2: ''
-		})}, 1600)
+			})
+			document.getElementById(card1).classList.remove('appear');
+			document.getElementById(card2).classList.remove('appear');
+		}, 1600)
+
 	}
 
 	componentDidUpdate(prevProps, prevState) {
