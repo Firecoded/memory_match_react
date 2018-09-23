@@ -8,126 +8,132 @@ import orangePortal from '../assets/images/backgrounds/backwithorangeportal.png'
 class CardArea extends Component {
 	constructor(props){
 		super(props)
-
 		this.state={
 			cards: [],
 			card1: '',
-			card2: '',
-			domElements: []
+			card2: ''
 		}
-		this.checkMatchObj = {};
 		this.lastClicked;
-		this.flag = false; //flag that will make cards rerender on dom when selected
 	}
 	componentDidMount() {
 		let images = this.importAll(require.context('../assets/images/cards', false, /\.(png|jpe?g|svg)$/));
-		let imagesDoubled = this.dupAndShuffle(images);
-		this.setState({
-			cards: imagesDoubled
-		}, this.buildDomElements(imagesDoubled))
+		let imagesDoubled = this.duplicate(images);
+		this.buildCardArr(imagesDoubled);	
 	}
 	importAll(r) {
   		return r.keys().map(r);
 	}
-	dupAndShuffle(array){
+	buildCardArr(array){
+		let arr = array.map((item, index)=>{
+			return {
+				url: item,
+				isFlipped: false,
+				isMatched: false,
+				switchCards: false
+			}
+		});
+		this.setState({
+			cards: arr
+		})
+	}
+	duplicate(array){
 		let copy = [];
-		for(let i = 0; i<array.length*2; i++){
-			copy[i] = array[i<9 ? i : i-9]
+		for(let i = 0; i<array.length; i++){
+			copy.push(array[i], array[i])
 		}
+		return this.shuffle(copy);
+	}
+	shuffle(array){
 		let shuffled = [];
 		for(let i = 0; i < 18; i++){
-			let randNum = Math.floor(Math.random() * copy.length)
-			let ranUrl = copy[randNum];
-			this.checkMatchObj['card' + i] = ranUrl;
+			let randNum = Math.floor(Math.random() * array.length)
+			let ranUrl = array[randNum];
 			shuffled.push(ranUrl);
-			copy.splice(randNum, 1)
+			array.splice(randNum, 1)
 		}
 		return shuffled;
 	}
 	handleClick(e){
-		if(this.lastClicked === e.target.name || e.target.name === undefined) return;
+		const currentCardIndex = e.target.name
+		if(this.lastClicked === currentCardIndex || currentCardIndex === undefined) return;
+		let newState = this.state
 		if(!this.state.card1){
-			this.lastClicked = e.target.name;
-			this.setState({card1: e.target.name});
-			this.flag = true;
+			this.lastClicked = currentCardIndex;
+			newState.cards[currentCardIndex].isFlipped = true;
+			newState.card1 = currentCardIndex;
+			this.setState(newState)
 			return;
 		}
 		if(!this.state.card2){
-			this.setState({card2: e.target.name})
-			this.checkWinOrSwitch(this.lastClicked, e.target.name)
-			this.lastClicked = null;
+			newState.cards[currentCardIndex].isFlipped = true;
+			newState.card2 = currentCardIndex;
+			this.setState(newState)
+			this.checkWinOrSwitch(this.lastClicked, currentCardIndex, newState);
 			return;
 		}
 	}
-	checkWinOrSwitch(card1, card2){
-		this.flag = true;
-		if(this.checkMatchObj[card1] === this.checkMatchObj[card2]){ // checks for a match, if they match portal disappears
-			this.checkMatchObj[card1] = null;
-			this.checkMatchObj[card2] = null;
-			this.flag = true;
-		} else {
+	checkWinOrSwitch(index1, index2, newState){
+		let card1 = newState.cards[index1];
+		let card2 = newState.cards[index2];
+		if(card1.url === card2.url){
+			setTimeout(()=>{	
+				card1.isMatched = true;
+				card2.isMatched = true;
+				newState.card1 = '';
+				newState.card2 = '';
+				this.setState(newState);
+				this.lastClicked = null;
+			}, 1200)
+			return;
+		} else{
 			setTimeout(()=>{
-				let urlSave = this.checkMatchObj[card1]
-				this.checkMatchObj[card1] = this.checkMatchObj[card2]; //switches cards if not a match
-				this.checkMatchObj[card2] = urlSave;
-				let cardArray = this.state.cards
-				let card1Index = card1.split('card');
-				card1Index = card1Index[1];
-				let card2Index = card2.split('card');
-				card2Index = card2Index[1];
-				let cardSave = cardArray[card1Index];
-				cardArray[card1Index] = this.state.cards[card2Index];
-				cardArray[card2Index] = cardSave;
-				document.getElementById(card1).classList.add('appear');
-				document.getElementById(card2).classList.add('appear');
-				this.flag = true;
-				this.setState({cards: cardArray})
-			}, 800)	
-		}
-		setTimeout(()=>{
-			this.flag = true;
-			this.setState({
-				card1: '',
-				card2: ''
-			})
-			document.getElementById(card1).classList.remove('appear');
-			document.getElementById(card2).classList.remove('appear');
-		}, 1600)
-
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		if(this.flag){
-			this.buildDomElements(this.state.cards)
-		}
+				let temp = card1.url
+				newState.cards[index1] = {
+					url: card2.url,
+					isFlipped: true,
+					isMatched: false,
+					switchCards: true
+				}
+				newState.cards[index2]= {
+					url: temp,
+					isFlipped: true,
+					isMatched: false,
+					switchCards: true
+				}
+				this.setState(newState);
+				newState.card1 = '';
+				newState.card2 = '';
+				setTimeout(()=>{
+					newState.cards[index1].isFlipped = false;
+					newState.cards[index2].isFlipped = false;
+					newState.cards[index1].switchCards = false;
+					newState.cards[index2].switchCards = false;
+					this.lastClicked = null;
+					this.setState(newState)
+				}, 1000)	
+			}, 1000)
+		}	
 	}
 
 	buildDomElements(array){
-		let arr =[];
-		for(let i = 0; i< array.length; i++){
-			let id = 'card' + i ;
-			let temp = <SingleCard 
-				isMatched = {this.checkMatchObj[id] ? false : true} 
-				key = {i} 
-				id = {id} 
-				card1 = {this.state.card1} 
-				card2 = {this.state.card2} 
-				url = {this.state.cards[i]} 
+		return array.map((item, index)=>{
+			return ( <SingleCard 
+				details = {array[index]}
+				key = {index}
+				id = {index}
+				card1 = {this.state.card1}
+				card2 = {this.state.card2}
 				callBack = {this.handleClick.bind(this)}
 				/>
-			arr.push(temp)
-		}
-		this.setState({
-			domElements: arr
+			)
 		})
-		this.flag = false;
 	}
 	
 
 	render() {
 		return (
 			<div className="game-cont">
-				{this.state.domElements}
+				{this.buildDomElements(this.state.cards)}
 			</div>
 		);
 	}

@@ -46,11 +46,13 @@
 	z-index: inherit;
 }
 .appear {
-	animation: .6s appear 1 0s linear;
+	animation: appear .6s 1 cubic-bezier(.36, .11, .89, .32)
 
 }
 @keyframes appear {
-	0% {opacity: 0;}
-	100% {opacity: 1}
+	0% {opacity: 0;
+		transform: scale(.9);}
+	100% {opacity: 1;
+		transform: scale(1.0);}
 }
 
