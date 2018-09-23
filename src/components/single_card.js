@@ -19,18 +19,19 @@ class SingleCard extends Component {
 	
 
 	render() {
-		const {url, id, isMatched} = this.props
+		const {url, isMatched, isFlipped, switchCards} = this.props.details
+		const {id, card1, card2} = this.props;
 		return (
 			<div onClick = {this.handleCallback.bind(this)} name = {id} className = ' single-card-cont'>
 				<div className = 'front'>
-					{this.props.card1 === id || this.props.card2 === id ? '' : isMatched ? '' : <img name = {id} src = {cardBack}/>}
+					{isFlipped || isMatched ? '' : <img name = {id} src = {cardBack}/>}
 				</div>
 				<div className = 'portal'>
-					<img src = {orangePortal} className = {this.props.card2 === id ? '' : 'hidden'}/>
-					<img src = {bluePortal} className = {this.props.card1 === id ? '' : 'hidden'}/>
+					<img src = {orangePortal} className = {parseInt(card2) === id ? '' : 'hidden'}/>
+					<img src = {bluePortal} className = {parseInt(card1) == id ? '' : 'hidden'}/>
 				</div>
 				<div className = 'back'>
-					<img className = 'card-img' id = {id} src = {url}/>
+					<img className = {`card-img ${switchCards ? 'appear' : ''}`} id = {id} src = {url}/>
 					<div className = 'background-div grey lighten-2'></div>
 				</div>
 			</div>
