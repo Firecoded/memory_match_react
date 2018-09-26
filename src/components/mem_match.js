@@ -12,8 +12,12 @@ class MemMatch extends Component {
 			gameOn: false,
 			appear: false,
 			type: false,
-			audioOn: false
+			audioOn: false,
+			attempts: 0,
+			matches: 0
 		}
+		this.attempts = 0;
+		this.matches = 0;
 		this.testSubject = Math.floor(Math.random() * 100000);
 	}
 	componentDidMount() {
@@ -29,7 +33,18 @@ class MemMatch extends Component {
 			}, 700)
 		}, 1000)	
 	}
-	
+	addAttempt(){
+		this.attempts++
+		this.setState({
+			attempts: this.attempts
+		})
+	}
+	addMatch(){
+		this.matches++
+		this.setState({
+			matches: this.matches
+		})
+	}
 	newDate(){
 		return new Date().toLocaleString();
 	}
@@ -49,33 +64,44 @@ class MemMatch extends Component {
 		})
 	}
 	restartGame(){
+		this.matches = 0;
+		this.attempts = 0;
 		this.setState({
 			gameOn: false,
 			typeOn: true
 		})
 	}
+	calculateAccuracy = () => {	
+		return Math.floor((this.state.matches/this.state.attempts)*100)
+	}
 
 	render() {
+		console.log(this.state)
 		return (
 			<div className = 'main-cont'>
 				<div className = {this.state.appear ? 'mac-window' : 'hidden'}>
 					<div className="win-buttons">
-						<a id="close" className="button" href="#"></a>
-						<a id="min" className="button" href="#"></a>
-						<a id="max" className="button" href="#"></a>
+						<a id="close" className="button" href=""></a>
+						<a id="min" className="button" href=""></a>
+						<a id="max" className="button" href=""></a>
 					</div>
 					<div className = {this.state.gameOn ? 'list-options appear' : 'hidden'}>
 						<ul>
 							<li onClick = {this.restartGame.bind(this)}>Restart</li>
 							<li onClick = {this.enableAudio.bind(this)}>{this.state.audioOn ? 'Disable' : 'Enable'} Audio</li>
 						</ul>
+					</div>
+					<div className = {this.state.gameOn ? 'stats-cont appear' : 'hidden'}>
+						<p>&gt; Attempts - {this.state.attempts}</p>
+						<p>&gt; Matches - {this.state.matches}</p>
+						<p>&gt; Accuracy - {this.state.matches ? this.calculateAccuracy() : '0'}%</p>
 					</div>		
 					<div className = {this.state.gameOn ? 'hidden' : 'window-text appear'}>
 						<p>&gt; {this.newDate()}: Aperture Science Memory Enrichment Center - TEST SUBJECT #{this.testSubject}</p>
 						<p>&gt; <span onClick = {this.enableAudio.bind(this)}>Click here</span> to {this.state.audioOn ? 'disable' : 'enable'} audio &quot;assistance&quot;<br/>&gt; </p>
 						{this.state.typeOn ? <TypeWriter text = '&gt; Cake and grief counseling will be available at the conclusion of this test, press any key to begin'/> : '' }
 					</div>
-					{this.state.gameOn ? <CardArea gameOn = {this.state.gameOn}/> : ''}
+					{this.state.gameOn ? <CardArea attemptCallback = {this.addAttempt.bind(this)} matchCallback = {this.addMatch.bind(this)} gameOn = {this.state.gameOn}/> : ''}
 				</div>
 			</div>
 		);

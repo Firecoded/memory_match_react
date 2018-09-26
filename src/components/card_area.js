@@ -15,6 +15,8 @@ class CardArea extends Component {
 		}
 		this.lastClicked;
 		this.imagesArray;
+		this.addAttempt = this.addAttempt.bind(this);
+		this.addMatch = this.addMatch.bind(this);
 	}
 	componentDidMount() {
 		let images = this.importAll(require.context('../assets/images/cards', false, /\.(png|jpe?g|svg)$/));
@@ -68,6 +70,7 @@ class CardArea extends Component {
 		if(!this.state.card2){
 			newState.cards[currentCardIndex].isFlipped = true;
 			newState.card2 = currentCardIndex;
+			this.addAttempt();
 			this.setState(newState)
 			this.checkWinOrSwitch(this.lastClicked, currentCardIndex, newState);
 			return;
@@ -77,6 +80,7 @@ class CardArea extends Component {
 		let card1 = newState.cards[index1];
 		let card2 = newState.cards[index2];
 		if(card1.url === card2.url){
+			this.addMatch();
 			setTimeout(()=>{	
 				card1.isMatched = true;
 				card2.isMatched = true;
@@ -115,7 +119,12 @@ class CardArea extends Component {
 			}, 1000)
 		}	
 	}
-
+	addMatch(){
+		this.props.matchCallback();
+	}
+	addAttempt(){
+		this.props.attemptCallback();
+	}
 	buildDomElements(array){
 		return array.map((item, index)=>{
 			return ( <SingleCard 
