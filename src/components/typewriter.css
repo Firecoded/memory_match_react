@@ -1,0 +1,22 @@
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blinking-cursor {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+.cursor{
+	animation: blinking-cursor .7s step-end infinite;
+	border-right: .35em solid orange;
+	position: relative;
+	top:-7px;
+}
+
+.text-to-be-typed {
+	display: inline-block;
+	overflow: auto;
+  	white-space: nowrap;
+  	overflow-x: hidden;
+  	animation: typing 4s steps(45, end);
+}

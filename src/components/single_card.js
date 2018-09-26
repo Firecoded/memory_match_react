@@ -22,7 +22,7 @@ class SingleCard extends Component {
 		const {url, isMatched, isFlipped, switchCards} = this.props.details
 		const {id, card1, card2} = this.props;
 		return (
-			<div onClick = {this.handleCallback.bind(this)} name = {id} className = ' single-card-cont'>
+			<div onClick = {this.handleCallback.bind(this)} name = {id} className = 'single-card-cont'>
 				<div className = 'front'>
 					{isFlipped || isMatched ? '' : <img name = {id} src = {cardBack}/>}
 				</div>
@@ -31,8 +31,7 @@ class SingleCard extends Component {
 					<img src = {bluePortal} className = {parseInt(card1) == id ? '' : 'hidden'}/>
 				</div>
 				<div className = 'back'>
-					<img className = {`card-img ${switchCards ? 'appear' : ''}`} id = {id} src = {url}/>
-					<div className = 'background-div grey lighten-2'></div>
+					<img className = {`card-img ${switchCards ? 'appear' : ''} ${isMatched ? 'disappear' : ''}`} id = {id} src = {url}/>
 				</div>
 			</div>
 		);

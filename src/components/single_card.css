@@ -3,9 +3,8 @@
     width: 16.6666%;
     height: 33%;
     display: inline-block;
-    /*background-color: red;*/
-    border: 1px solid red;
     z-index: 4;
+    padding: 0 1.25%;
 }
 .front, .back, .portal {
 	position: absolute;
@@ -14,7 +13,7 @@
     margin: 6%;
     display: inline-block;
     text-align: center;
-    border: 1px solid blue;
+    border-radius: 5px;
 }
 .front {
 	z-index: 2;
@@ -45,14 +44,17 @@
 	left: 0;
 	z-index: inherit;
 }
-.appear {
-	animation: appear .6s 1 cubic-bezier(.36, .11, .89, .32)
 
+.disappear {
+	animation: disappear 1.2s 1 0s linear;
+	transform: scale(0);
+	opacity: 0;
 }
-@keyframes appear {
-	0% {opacity: 0;
-		transform: scale(.9);}
-	100% {opacity: 1;
-		transform: scale(1.0);}
+
+@keyframes disappear{
+	0% {transform: scale(1);
+		opacity: 1;}
+	100% {transform: scale(0);
+		opacity: 0;}
 }
 

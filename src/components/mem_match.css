@@ -4,19 +4,122 @@ html, body {
   margin: 0;
   font-size: 0;
 }
+
 .main-cont {
 	height: 100vh;
+	background-image: url(../assets/images/terminal.jpg);
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    font-size: 0;
+    overflow: hidden;
 }
-.main-logo{
-	font-size: 3.5vmax;
+.mac-window {
+	height: 80%;
+	width: 70%;
+	top: 10%;
+	left: 15%;
+	position: relative;
+	background-color: #434444;
+	opacity: .9;
+	animation: appeartwo .7s 1 0s linear;
+	border-radius: 7px;
+	font-family: 'Inconsolata', monospace;
+	font-size: 16px;
+	margin: 0;
+}
+.mac-window * {
+	margin: 0;
+	color: #df9711;
+}
+.window-text{
+	font-family: 'Inconsolata', monospace;
+	font-size: 16px;
+	margin: 0;
+	clear: left;
+	float: left;
+	left: 20px;
+	position: relative;
+}
+.win-buttons {
+	position: relative;
+	width: 8%;
+	left: 15px;
+	float: left;
+	margin: 0;
+}
+.button {
+	display: inline-block;
+	text-align: center;
+	width: 10px;
+	height: 10px;
+	border: 0.5px solid;
+	border-radius: 100px;
+	vertical-align: middle;
+	float: left;
+	margin: 3px 7px 3px 0;
+}
+#close {
+	background: #e25544;
+	border-color: #d84b3a;
+}
+#min {
+	background: #f5b640;
+	border-color: #e0a12b;
+}
+#max {
+	background: #7cb058;
+	border-color: #6fa44b;
 }
 .game-cont{
-	height:	80%;
+	display: inline-block;
+	height:	60vh;
 	width: 70%;
-	border: 1px solid red;
 	position: relative;
-	left: 15%;
+	top: 5vh;
+    left: 15%;
 }
 .hidden {
 	display: none;
+}
+
+.list-options *{
+	display: inline-block;
+}
+.list-options ul li {
+	cursor: pointer;
+	margin: 0 10px;
+}
+.terminal-appear {
+	animation: terminal 1.5s 1 steps(55, end);
+	overflow: hidden;
+}
+.terminal-appear .single-card-cont{
+	animation: terminalcards 1.5s 1 linear;
+	overflow: auto;
+	white-space: nowrap;
+}
+@keyframes terminal {
+	0% {top: 0vh;
+		height: 0vh;}	
+	100% {top: 5vh;
+		height: 60vh;}	
+}
+@keyframes terminalcards {
+	0% {height: 3%;
+		transform: scale(.4);}
+	
+	100% {height: 33%;
+		transform: scale(1);}	
+}
+.appear {
+	animation: appear .6s 1 cubic-bezier(.36, .11, .89, .32)
+}
+@keyframes appear {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+@keyframes appeartwo {
+	0% {opacity: 0;}
+	100% {opacity: .95;}
 }

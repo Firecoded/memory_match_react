@@ -14,11 +14,12 @@ class CardArea extends Component {
 			card2: ''
 		}
 		this.lastClicked;
+		this.imagesArray;
 	}
 	componentDidMount() {
 		let images = this.importAll(require.context('../assets/images/cards', false, /\.(png|jpe?g|svg)$/));
-		let imagesDoubled = this.duplicate(images);
-		this.buildCardArr(imagesDoubled);	
+		this.imagesArray = this.duplicate(images);
+		this.buildCardArr(this.imagesArray);	
 	}
 	importAll(r) {
   		return r.keys().map(r);
@@ -129,10 +130,9 @@ class CardArea extends Component {
 		})
 	}
 	
-
 	render() {
 		return (
-			<div className="game-cont">
+			<div className={`game-cont ${this.props.gameOn ? 'terminal-appear' : ''}`}>
 				{this.buildDomElements(this.state.cards)}
 			</div>
 		);
