@@ -68,7 +68,9 @@ class MemMatch extends Component {
 		this.attempts = 0;
 		this.setState({
 			gameOn: false,
-			typeOn: true
+			typeOn: true,
+			matches: 0,
+			attempts: 0
 		})
 	}
 	calculateAccuracy = () => {	
@@ -97,7 +99,7 @@ class MemMatch extends Component {
 						<p>&gt; Accuracy - {this.state.matches ? this.calculateAccuracy() : '0'}%</p>
 					</div>		
 					<div className = {this.state.gameOn ? 'hidden' : 'window-text appear'}>
-						<p>&gt; {this.newDate()}: Aperture Science Memory Enrichment Center - TEST SUBJECT #{this.testSubject}</p>
+						<p>&gt; {this.newDate()}: Aperture Science <strong>Memory Enrichment Center</strong> - TEST SUBJECT #{this.testSubject}</p>
 						<p>&gt; <span onClick = {this.enableAudio.bind(this)}>Click here</span> to {this.state.audioOn ? 'disable' : 'enable'} audio &quot;assistance&quot;<br/>&gt; </p>
 						{this.state.typeOn ? <TypeWriter text = '&gt; Cake and grief counseling will be available at the conclusion of this test, press any key to begin'/> : '' }
 					</div>
