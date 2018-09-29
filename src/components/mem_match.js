@@ -76,6 +76,9 @@ class MemMatch extends Component {
 	calculateAccuracy = () => {	
 		return Math.floor((this.state.matches/this.state.attempts)*100)
 	}
+	openNewWindow(e){
+		console.log(e, e.target.id)
+	}
 
 	render() {
 		console.log(this.state)
@@ -83,9 +86,9 @@ class MemMatch extends Component {
 			<div className = 'main-cont'>
 				<div className = {this.state.appear ? 'mac-window' : 'hidden'}>
 					<div className="win-buttons">
-						<a id="close" className="button" href=""></a>
-						<a id="min" className="button" href=""></a>
-						<a id="max" className="button" href=""></a>
+						<a id="close" className="button" onClick = {this.openNewWindow}></a>
+						<a id="min" className="button" onClick = {this.openNewWindow}></a>
+						<a id="max" className="button" onClick = {this.openNewWindow}></a>
 					</div>
 					<div className = {this.state.gameOn ? 'list-options appear' : 'hidden'}>
 						<ul>
@@ -103,7 +106,7 @@ class MemMatch extends Component {
 						<p>&gt; <span onClick = {this.enableAudio.bind(this)}>Click here</span> to {this.state.audioOn ? 'disable' : 'enable'} audio &quot;assistance&quot;<br/>&gt; </p>
 						{this.state.typeOn ? <TypeWriter text = '&gt; Cake and grief counseling will be available at the conclusion of this test, press any key to begin'/> : '' }
 					</div>
-					{this.state.gameOn ? <CardArea attemptCallback = {this.addAttempt.bind(this)} matchCallback = {this.addMatch.bind(this)} gameOn = {this.state.gameOn}/> : ''}
+					{this.state.gameOn ? <CardArea restartCallback = {this.restartGame.bind(this)} attemptCallback = {this.addAttempt.bind(this)} matchCallback = {this.addMatch.bind(this)} gameOn = {this.state.gameOn}/> : ''}
 				</div>
 			</div>
 		);

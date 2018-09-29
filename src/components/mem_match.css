@@ -18,9 +18,9 @@ html, body {
     animation: maincontappear .9s linear 1 0s
 }
 .mac-window {
-	height: 80%;
+	height: 85%;
 	width: 70%;
-	top: 10%;
+	top: 7.5%;
 	left: 15%;
 	position: relative;
 	background-color: #434444;
@@ -51,6 +51,9 @@ html, body {
 	left: 15px;
 	float: left;
 	margin: 0;
+}
+.win-buttons a {
+	cursor: pointer;
 }
 .button {
 	display: inline-block;
@@ -95,7 +98,7 @@ html, body {
 
 .game-cont{
 	display: inline-block;
-	height:	60vh;
+	height:	65vh;
 	width: 70%;
 	position: relative;
 	top: 5vh;
@@ -115,6 +118,12 @@ html, body {
 	position: absolute;
 	top: 0;
 }
+.cake-cont p {
+	position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
 .no-pixel-cake {
 	z-index: 4;
 }
@@ -127,13 +136,12 @@ html, body {
 }
 
 .terminal-appear {
-	animation: terminal 1.5s 1 steps(55, end);
+	/*animation: terminal 1.5s 1 steps(55, end);*/
 	overflow: hidden;
 }
 .terminal-appear .single-card-cont{
 	animation: terminalcards 1.5s 1 linear;
-	overflow: auto;
-	white-space: nowrap;
+	
 }
 
 /****** Animations *******/
@@ -161,13 +169,15 @@ html, body {
 		height: 60vh;}	
 }
 @keyframes terminalcards {
-	0% {height: 3%;
-		transform: scale(.4);}
-	100% {height: 33%;
+	0% {top: -100%;
+		opacity: 0;
+		transform: scale(.7);}
+	100% {top: 0;
+		opacity: 1;
 		transform: scale(1);}	
 }
 .appear {
-	animation: appear .6s 1 cubic-bezier(.36, .11, .89, .32)
+	animation: appear .6s 1 linear;
 }
 @keyframes appear {
 	0% {opacity: 0;}
