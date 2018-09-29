@@ -91,7 +91,7 @@ class CardArea extends Component {
 				newState.card2 = '';
 				this.setState(newState);
 				this.lastClicked = null;
-			}, 1200)
+			}, 1000)
 			return;
 		} else{
 			setTimeout(()=>{
@@ -134,6 +134,7 @@ class CardArea extends Component {
 			<div className = "cake-cont">
 				<img className = 'pixel-cake' src = {cake}/>
 				<img className = 'no-pixel-cake' src = {cakeNonPixel}/>
+				<p>Play again? <span onClick = {this.props.restartCallback}>Yes</span>/No</p>
 			</div>
 		)
 	}
@@ -154,7 +155,7 @@ class CardArea extends Component {
 	render() {
 		return (
 			<div className={`game-cont ${this.props.gameOn ? 'terminal-appear' : ''}`}>
-				{this.matches === 9 && !this.state.card1 ? this.displayWin() : ''}
+				{this.matches === 1 && !this.state.card1 ? this.displayWin() : ''}
 				{this.buildDomElements(this.state.cards)}
 				<p style = {{position: 'absolute', top: '0'}}></p>
 			</div>
