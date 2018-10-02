@@ -10,7 +10,7 @@ class TypeWriter extends Component {
 	render(){
 		return (
 			<Fragment>
-				<p className = "text-to-be-typed">{this.props.text}</p><span className='cursor'/>
+				<p className = "text-to-be-typed">{this.props.text}, <span className = 'bigger-text'>{this.props.biggertext}</span></p><span className='cursor'/>
 			</Fragment>	
 		)
 	}	

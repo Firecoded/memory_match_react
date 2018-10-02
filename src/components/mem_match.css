@@ -18,10 +18,10 @@ html, body {
     animation: maincontappear .9s linear 1 0s
 }
 .mac-window {
-	height: 85%;
-	width: 70%;
-	top: 7.5%;
-	left: 15%;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0%;
 	position: relative;
 	background-color: #434444;
 	opacity: .9;
@@ -31,10 +31,35 @@ html, body {
 	font-family: 'Inconsolata', monospace;
 	font-size: 16px;
 	margin: 0;
+	box-shadow: 0 20px 70px rgba(0, 0, 0, 0.55);
+	border: .5px solid #adadad;
 }
 .mac-window * {
 	margin: 0;
 	color: #df9711;
+}
+.mac-window2{
+	height: 85%;
+	width: 70%;
+	top: 7.5%;
+	left: 15%;
+	position: relative;
+	background-color: transparent;
+}
+.top-window {
+	position: relative;
+	top: 0;
+	width: 100%;
+	background-color: #A0A3A5;
+	border-radius: 6px 6px 0 0;
+	text-align: center;
+}
+.top-window-text{
+	position: relative;
+	font-size: 15px;
+	color: #000000;
+	top: 0;
+	font-weight: 600;
 }
 .window-text{
 	font-family: 'Inconsolata', monospace;
@@ -46,9 +71,9 @@ html, body {
 	position: relative;
 }
 .win-buttons {
-	position: relative;
-	width: 8%;
-	left: 15px;
+	position: absolute;
+	left: 12px;
+	top: 2px;
 	float: left;
 	margin: 0;
 }
@@ -58,8 +83,8 @@ html, body {
 .button {
 	display: inline-block;
 	text-align: center;
-	width: 10px;
-	height: 10px;
+	width: 11px;
+	height: 11px;
 	border: 0.5px solid;
 	border-radius: 100px;
 	vertical-align: middle;
@@ -81,18 +106,32 @@ html, body {
 .hidden {
 	display: none;
 }
-
-.list-options *{
-	display: inline-block;
+.list-options {
+	position: absolute;
+    left: 7.7%;
+	top: 0;
+}
+.list-options span {
+	font-size: 14px;
+	color: #000000;
+	padding: 0 5px;
+	cursor: pointer;
 }
 .stats-cont{
 	position: absolute;
-	top: 5vh;
+	top: 10vh;
 	left: 2%;
 }
-.list-options ul li {
-	cursor: pointer;
-	margin: 0 10px;
+
+.bigger-text{
+	font-size: 18px;
+	font-weight: 600;
+}
+.underline-text{
+	text-decoration: underline;
+}
+.window-shake{
+	animation: windowshake .2s linear 0s 2;
 }
 /*********Game Container******/
 
@@ -101,8 +140,9 @@ html, body {
 	height:	65vh;
 	width: 70%;
 	position: relative;
-	top: 5vh;
+	top: 7vh;
     left: 15%;
+    margin-left: 15px;
 }
 .cake-cont {
 	position: absolute;
@@ -145,6 +185,14 @@ html, body {
 }
 
 /****** Animations *******/
+
+@keyframes windowshake {
+	0%{left:15%;}
+	25%{left: 14%;}
+	50%{left:15%;}
+	75%{left: 16%;}
+	100%{left: 15%;}
+}
 
 @keyframes cakecontappear {
 	from { height: 0;
