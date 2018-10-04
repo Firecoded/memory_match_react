@@ -50,16 +50,17 @@ html, body {
 	position: relative;
 	top: 0;
 	width: 100%;
-	background-color: #A0A3A5;
+	background-color: #B0B5B7;
 	border-radius: 6px 6px 0 0;
 	text-align: center;
 }
 .top-window-text{
+	font-family: Helvetica Neue;
 	position: relative;
-	font-size: 15px;
+	font-size: 14px;
 	color: #000000;
 	top: 0;
-	font-weight: 600;
+	
 }
 .window-text{
 	font-family: 'Inconsolata', monospace;
@@ -112,9 +113,10 @@ html, body {
 	top: 0;
 }
 .list-options span {
-	font-size: 14px;
+	font-family: Helvetica Neue;
+	font-size: 13px;
 	color: #000000;
-	padding: 0 5px;
+	padding: 0 7px;
 	cursor: pointer;
 }
 .stats-cont{
@@ -129,6 +131,7 @@ html, body {
 }
 .underline-text{
 	text-decoration: underline;
+	cursor: pointer;
 }
 .window-shake{
 	animation: windowshake .2s linear 0s 2;
@@ -196,9 +199,11 @@ html, body {
 
 @keyframes cakecontappear {
 	from { height: 0;
-		   opacity: 0; }
+		   opacity: 0;
+		   filter: grayscale(1); }
 	to {height: 100%;
-	    opacity: 1;}
+	    opacity: 1;
+		filter: grayscale(0);}
 }
 @keyframes cakeunpixel{
 	0% {opacity: 1;}

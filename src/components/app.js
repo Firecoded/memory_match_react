@@ -2,10 +2,6 @@ import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import MemMatch from './mem_match';
 
-const App = () => (
-    <React.Fragment>
-        <MemMatch/>
-    </React.Fragment>
-);
+const App = () => <MemMatch/>
 
 export default App;

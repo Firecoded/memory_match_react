@@ -20,7 +20,7 @@
 }
 .front {
 	z-index: 2;
-	opacity: .5;
+	/*opacity: .5;*/
 }
 .portal {
 	z-index: 1;

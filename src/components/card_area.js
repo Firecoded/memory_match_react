@@ -7,6 +7,7 @@ import orangePortal from '../assets/images/backgrounds/backwithorangeportal.png'
 import cake from '../assets/images/backgrounds/cake.jpg';
 import cakeNonPixel from '../assets/images/backgrounds/cake1.jpg';
 
+
 class CardArea extends Component {
 	constructor(props){
 		super(props)
@@ -15,8 +16,6 @@ class CardArea extends Component {
 			card1: '',
 			card2: ''
 		}
-		this.lastClicked;
-		this.imagesArray;
 		this.matches = 0;
 		this.addAttempt = this.addAttempt.bind(this);
 		this.addMatch = this.addMatch.bind(this);
@@ -91,7 +90,7 @@ class CardArea extends Component {
 				newState.card2 = '';
 				this.setState(newState);
 				this.lastClicked = null;
-			}, 1000)
+			}, 920)
 			return;
 		} else{
 			setTimeout(()=>{
@@ -118,8 +117,8 @@ class CardArea extends Component {
 					newState.cards[index2].switchCards = false;
 					this.lastClicked = null;
 					this.setState(newState)
-				}, 1000)	
-			}, 1000)
+				}, 900)	
+			}, 900)
 		}	
 	}
 	addMatch(){
@@ -155,7 +154,7 @@ class CardArea extends Component {
 	render() {
 		return (
 			<div className={`game-cont ${this.props.gameOn ? 'terminal-appear' : ''}`}>
-				{this.matches === 1 && !this.state.card1 ? this.displayWin() : ''}
+				{this.matches === 9 && !this.state.card1 ? this.displayWin() : ''}
 				{this.buildDomElements(this.state.cards)}
 				<p style = {{position: 'absolute', top: '0'}}></p>
 			</div>
