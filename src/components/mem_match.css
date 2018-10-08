@@ -59,8 +59,7 @@ html, body {
 	position: relative;
 	font-size: 14px;
 	color: #000000;
-	top: 0;
-	
+	top: 0;	
 }
 .window-text{
 	font-family: 'Inconsolata', monospace;
@@ -184,7 +183,9 @@ html, body {
 }
 .terminal-appear .single-card-cont{
 	animation: terminalcards 1.5s 1 linear;
-	
+}
+.pointer {
+	cursor: pointer;
 }
 
 /****** Animations *******/

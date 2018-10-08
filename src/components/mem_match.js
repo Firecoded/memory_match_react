@@ -71,12 +71,11 @@ class MemMatch extends Component {
 		document.addEventListener("keydown", this.handleKeyDown);
 	}
 	enableAudio = () => {
-
 		this.randomSoundIndex = Math.floor(Math.random() * 4)
 		this.setState({
 			audioOn: !this.state.audioOn
 		})
-		setTimeout(()=>{this.introAudioHasPlayed = true;}, 7000)
+		setTimeout(()=>{this.introAudioHasPlayed = true;}, 12000)
 	}
 	
 	restartGame = () => {
@@ -112,6 +111,7 @@ class MemMatch extends Component {
 			<div className = 'main-cont'>
 				{this.state.attempts === 6 && this.state.audioOn ? <audio ref={e => this.audioPlayer = e} src = {this.adviceSounds[0]} autoPlay/> : ''}
 				{this.state.attempts === 10 && this.state.audioOn ? <audio ref={e => this.audioPlayer = e} src = {this.adviceSounds[1]} autoPlay/> : ''}
+				{this.state.attempts === 16 && this.state.audioOn ? <audio ref={e => this.audioPlayer = e} src = {this.adviceSounds[2]} autoPlay/> : ''}
 				{this.state.audioOn && !this.state.windowShake && !this.introAudioHasPlayed ? <audio ref={e => this.audioPlayer = e} src = {this.welcomeSounds[this.randomSoundIndex]} autoPlay/> : ''}
 				{this.state.audioOn && this.state.windowShake ? <audio ref={e => this.audioPlayer = e} src = {dontCareMp3} autoPlay/> : ''}
 				<div className = {this.state.appear ? this.state.windowShake ? 'window-shake mac-window2' : 'mac-window2' : 'mac-window2'}>
@@ -145,6 +145,7 @@ class MemMatch extends Component {
 							restartCallback = {this.restartGame} 
 							attemptCallback = {this.addAttempt} 
 							matchCallback = {this.addMatch} 
+							audio = {this.state.audioOn}
 							gameOn = {this.state.gameOn}/> : ''}
 					</div>
 				</div>

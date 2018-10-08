@@ -6,6 +6,7 @@ import bluePortal from '../assets/images/backgrounds/backwithblueportal.png';
 import orangePortal from '../assets/images/backgrounds/backwithorangeportal.png';
 import cake from '../assets/images/backgrounds/cake.jpg';
 import cakeNonPixel from '../assets/images/backgrounds/cake1.jpg';
+import winMp3 from '../assets/sounds/stillalive.mp3';
 
 
 class CardArea extends Component {
@@ -133,7 +134,7 @@ class CardArea extends Component {
 			<div className = "cake-cont">
 				<img className = 'pixel-cake' src = {cake}/>
 				<img className = 'no-pixel-cake' src = {cakeNonPixel}/>
-				<p>Play again? <span onClick = {this.props.restartCallback}>Yes</span>/No</p>
+				<p>Play again? <span className = 'pointer' onClick = {this.props.restartCallback}>Yes</span>/No</p>
 			</div>
 		)
 	}
@@ -157,6 +158,7 @@ class CardArea extends Component {
 				{this.matches === 9 && !this.state.card1 ? this.displayWin() : ''}
 				{this.buildDomElements(this.state.cards)}
 				<p style = {{position: 'absolute', top: '0'}}></p>
+				{this.matches === 9 && this.props.audio ? <audio ref={e => this.audioPlayer = e} src = {winMp3} autoPlay/> : ''}
 			</div>
 		);
 	}
