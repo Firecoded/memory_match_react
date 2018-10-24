@@ -1,7 +1,8 @@
 import React from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
-import MemMatch from './mem_match';
+import Chamber from './chamber';
 
-const App = () => <MemMatch/>
+
+const App = () => <Chamber/>
 
 export default App;

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import SingleCard from './single_card';
 import './single_card.css';
-import cardBack from '../assets/images/back.png';
-import bluePortal from '../assets/images/backgrounds/backwithblueportal.png';
-import orangePortal from '../assets/images/backgrounds/backwithorangeportal.png';
 import cake from '../assets/images/backgrounds/cake.jpg';
 import cakeNonPixel from '../assets/images/backgrounds/cake1.jpg';
 import winMp3 from '../assets/sounds/stillalive.mp3';

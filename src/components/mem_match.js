@@ -137,7 +137,7 @@ class MemMatch extends Component {
 							<p>&gt; <span 
 							className = 'underline-text' 
 							onClick = {this.enableAudio}>
-							Click here</span> to {this.state.audioOn ? 'disable' : 'enable'} audio &quot;assistance&quot;<br/>&gt; </p>
+							{this.state.audioOn ? 'Disable' : 'Enable'} audio</span> &quot;assistance&quot;<br/>&gt; </p>
 
 							{this.state.typeOn ? <TypeWriter text = '&gt; Cake and grief counseling will be available at the conclusion of this test' biggertext = 'press any key to begin'/> : '' }
 						</div>
