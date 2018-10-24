@@ -1,0 +1,72 @@
+.chamber-cont {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.test-chamber{
+    position: relative;
+    height: 248%;
+    top: -98%;
+    background-image: url(../assets/images/backgrounds/chamber-min.jpg);
+    background-repeat: no-repeat;
+    background-size: 248% 100%;
+    opacity: 1;
+    display: inherit;
+}
+.click-div1 {
+    position: absolute;
+    height: 6.4%;
+    width: 8%;
+    bottom: 44%;
+    right: 50.4%;
+    cursor: pointer;
+}
+.click-div2{
+    position: absolute;
+    height: 11.4%;
+    width: 15%;
+    bottom: 29%;
+    right: 59.4%;
+    cursor: pointer;
+}
+.displaynone {
+    display: none;
+}
+
+.pan {
+    animation: pan 4s ease-in-out 0s 1;
+    background-position: 94%;
+}
+.fadeaway {
+    animation: fadeaway 1s linear 0s 1;
+    opacity: 0;
+    background-position: 94%;
+    z-index: -1;
+}
+
+
+@keyframes pan {
+    from {
+        background-position: 0%;
+    }
+    to{
+        background-position: 94%;
+    }
+}
+
+@keyframes fadeaway {
+    0% {
+        opacity: 1;
+        z-index: 1;
+    }
+    99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        z-index: -1;
+    }
+}

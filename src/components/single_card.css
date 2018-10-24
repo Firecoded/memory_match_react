@@ -48,6 +48,9 @@
 	left: 0;
 	z-index: inherit;
 }
+.front img {
+	cursor: pointer;
+}
 
 .disappear {
 	animation: disappear .8s 1 0s linear;
