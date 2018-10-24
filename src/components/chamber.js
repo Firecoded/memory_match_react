@@ -34,7 +34,6 @@ class Chamber extends Component {
     handleDivClick = () =>{
         this.setState({
             fade: true,
-            pan: false
         })
         setTimeout(()=>{
             this.setState({
