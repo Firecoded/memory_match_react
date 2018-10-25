@@ -8,12 +8,13 @@
     position: relative;
     height: 248%;
     top: -78%;
-    background-image: url(../assets/images/backgrounds/chamber-min.jpg);
+    background-image: url(../assets/images/backgrounds/chamber.jpg);
     background-repeat: no-repeat;
     background-size: 248% 100%;
     opacity: 1;
     display: inherit;
 }
+
 .click-div1 {
     position: absolute;
     height: 6.4%;
@@ -30,6 +31,7 @@
     right: 59.4%;
     cursor: pointer;
 }
+
 .displaynone {
     display: none;
 }
@@ -44,6 +46,12 @@
     opacity: 0;
     background-position: 94%;
     z-index: -1;
+}
+.fadeawayopp {
+    animation: fadeaway 1.5s linear 0s 1 reverse;
+    opacity: 1;
+    background-position: 94%;
+    z-index: 1;
 }
 
 
@@ -73,3 +81,35 @@
         z-index: -1;
     }
 }
+
+@media only screen and (max-width : 768px){
+    .mobile-modal{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: #434444;
+        z-index: 10;
+    }
+    .mobile-modal h3{
+        color: #df9711;
+        font-size: 30px;
+        width: 90%;
+        left: 5%;
+        height: 80%;
+        z-index: 11;
+        text-align: center;
+        top: 20%;
+        position: absolute;
+        font-family: 'Inconsolata', monospace;
+    }
+    .test-chamber{
+        display: none;
+    }
+}
+
+@media only screen and (min-width : 769px){
+    .mobile-modal{
+        display: none;
+    }
+}
+
