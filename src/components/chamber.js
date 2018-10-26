@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MemMatch from './mem_match';
-import chamberPic from '../assets/images/backgrounds/chamber.jpg';
 import './chamber.css';
 
 class Chamber extends Component {
@@ -20,7 +19,7 @@ class Chamber extends Component {
         this.setState({
             pan: true
         }, this.showDivs)
-      }, 2500);
+      }, 2800);
       
     }
     showDivs = () => {
@@ -45,12 +44,16 @@ class Chamber extends Component {
 
     render() {
         return (
-            <div className = 'chamber-cont'>
+            <div className = 'chamber-cont fadeawayopp'>
+                <div className = "mobile-modal">
+                    <h3>It appears you are on a mobile device, this site is currently intended to be viewed on a desktop computer. Check back later for a mobile friendly version.</h3>
+                </div>
                 {this.state.startGame ? <MemMatch/> : null }
                 <div className = {`test-chamber ${this.state.pan ? 'pan' : ''} ${this.state.fade ? "fadeaway" : ''}`}>
                     <div onClick = {this.handleDivClick} className = {`click-div1 ${this.state.panIsDone ? '' : 'displaynone'}`}></div>
                     <div onClick = {this.handleDivClick} className = {`click-div2 ${this.state.panIsDone ? '' : 'displaynone'}`}></div>
                 </div>
+                
             </div>    
         )
     }
