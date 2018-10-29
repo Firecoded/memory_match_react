@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MemMatch from './mem_match';
 import './chamber.css';
+import rArrow from '../assets/images/rarrow.png';
 
 class Chamber extends Component {
     constructor(props){
@@ -10,16 +11,15 @@ class Chamber extends Component {
             pan: false,
             panIsDone: false,
             fade: false,
-            startGame: false
+            startGame: false,
+            bounce: false
         }
     }
   
     componentDidMount = () => {
-      setTimeout(()=>{
-        this.setState({
-            pan: true
-        }, this.showDivs)
-      }, 2800);
+      this.setState({
+          bounce: true
+      })
       
     }
     showDivs = () => {
@@ -40,6 +40,12 @@ class Chamber extends Component {
             })
           }, 1200);
     }
+    startPan = () => {
+        this.setState({
+            pan: true,
+            bounce: false
+        }, this.showDivs)
+    }
     
 
     render() {
@@ -47,6 +53,12 @@ class Chamber extends Component {
             <div className = 'chamber-cont fadeawayopp'>
                 <div className = "mobile-modal">
                     <h3>It appears you are on a mobile device, this site is currently intended to be viewed on a desktop computer. Check back later for a mobile friendly version.</h3>
+                </div>
+                <div className = {`explore-div ${this.state.bounce ? '' : 'fadeaway'}`}>
+                    <img className = {`right-arrow ${this.state.bounce ? "arrow-bounce" : 'fadeaway'}`} 
+                        onClick = {this.startPan}
+                        src = {rArrow} 
+                        alt = "arrow pointing right"/>
                 </div>
                 {this.state.startGame ? <MemMatch/> : null }
                 <div className = {`test-chamber ${this.state.pan ? 'pan' : ''} ${this.state.fade ? "fadeaway" : ''}`}>
