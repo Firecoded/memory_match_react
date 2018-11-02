@@ -118,6 +118,9 @@ html, body {
 	padding: 0 7px;
 	cursor: pointer;
 }
+.list-options span:hover {
+	text-decoration: underline;
+}
 .stats-cont{
 	position: absolute;
 	top: 10vh;
@@ -164,7 +167,8 @@ html, body {
 	position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+	transform: translateX(-50%);
+	z-index: 10;
 }
 .no-pixel-cake {
 	z-index: 4;

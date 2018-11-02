@@ -3,7 +3,9 @@
     height: 100vh;
     overflow: hidden;
 }
-
+*{
+    user-select: none;
+}
 .test-chamber{
     position: relative;
     height: 248%;
@@ -113,7 +115,7 @@
     }
 }
 
-@media only screen and (max-width : 768px){
+@media only screen and (max-width : 768px), screen and (max-height : 470px){
     .mobile-modal{
         position: absolute;
         height: 100%;
@@ -136,11 +138,35 @@
     .test-chamber{
         display: none;
     }
+    .fadeawayopp {
+        animation: none;
+        opacity: 1;
+        background-position: 94%;
+        z-index: 1;
+    }
 }
 
-@media only screen and (min-width : 769px){
+@media only screen and (min-width : 769px) and (max-width : 471px){
     .mobile-modal{
         display: none;
     }
 }
+@media only screen and (max-height : 650px){
+    .mac-window2{
+        top: 0%;
+        height: 100%;
+    }
+    .game-cont{
+        height: 90vh;
+        top: 2vh;
+    }
+}
+@media only screen and (max-width : 1240px){
+    .mac-window2{
+        left: 0px;
+        width: 100%;
+    }
+}
+
+
 
