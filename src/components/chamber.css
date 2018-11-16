@@ -115,7 +115,7 @@
     }
 }
 
-@media only screen and (max-width : 768px), screen and (max-height : 470px){
+@media only screen and (max-width : 660px), screen and (max-height : 370px){
     .mobile-modal{
         position: absolute;
         height: 100%;
@@ -144,29 +144,87 @@
         background-position: 94%;
         z-index: 1;
     }
+    
 }
 
-@media only screen and (min-width : 769px) and (max-width : 471px){
+@media only screen and (min-width : 661px) and (max-width : 371px){
     .mobile-modal{
         display: none;
     }
+    
 }
 @media only screen and (max-height : 650px){
     .mac-window2{
-        top: 0%;
-        height: 100%;
+        top: 4%;
+        height: 92%;
     }
     .game-cont{
-        height: 90vh;
-        top: 2vh;
+        height: 76vh;
+        top: 5vh;
+    }
+    .bigger-text {
+        display: none;
+    }
+    .bigger-text2 {
+        display: initial;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+    .mac-window {
+        font-size: 13px;
+    }
+    .list-options{
+        font-size: 12px;
+    }
+    .list-options span {
+        font-size: 12px;
     }
 }
-@media only screen and (max-width : 1240px){
+@media only screen and (min-height : 651px){
+    .bigger-text2{
+        display: none;
+    }
+}
+@media only screen and (max-width : 1250px){
+    .window-text{
+        font-size: 13.5px;
+    }
+    .top-window-text{
+        font-size: 13.5px;
+    }
+    .list-options span {
+        font-size: 12.5px;
+    }
+    .bigger-text{
+        font-size: 15px;
+    }
+    
+}
+@media only screen and (max-width : 1100px){
     .mac-window2{
         left: 0px;
         width: 100%;
     }
 }
 
+@media only screen and (max-width : 800px){
+    .text-to-be-typed {
+        font-size: 12.5px;
+    }
+    .bigger-text{
+        font-size: 13px;
+    }
+    .top-window-text{
+        font-size: 12.5px;
+    }
+    .list-options span {
+        font-size: 11px;
+        padding: 0px 4px;
+        left: 10px;
+        position: relative;
+    }
+
+
+}
 
 

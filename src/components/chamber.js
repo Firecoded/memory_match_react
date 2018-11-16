@@ -52,7 +52,7 @@ class Chamber extends Component {
         return (
             <div className = 'chamber-cont fadeawayopp'>
                 <div className = "mobile-modal">
-                    <h3>It appears you are on a mobile device, this site is currently intended to be viewed on a desktop computer. Check back later for a mobile friendly version.</h3>
+                    <h3>The current dimensions of your device or browser is not currently supported. Try resizing your browser or rotating your device.</h3>
                 </div>
                 <div className = {`explore-div ${this.state.bounce ? '' : 'fadeaway'}`}>
                     <img className = {`right-arrow ${this.state.bounce ? "arrow-bounce" : 'fadeaway'}`} 

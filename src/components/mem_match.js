@@ -139,7 +139,7 @@ class MemMatch extends Component {
 							onClick = {this.enableAudio}>
 							{this.state.audioOn ? 'Disable' : 'Enable'} audio</span> &quot;assistance&quot;<br/>&gt; </p>
 
-							{this.state.typeOn ? <TypeWriter text = '&gt; Cake and grief counseling will be available at the conclusion of this test' biggertext = 'press any key to begin'/> : '' }
+							{this.state.typeOn ? <TypeWriter callback = {this.handleKeyDown} text = '&gt; Cake and grief counseling will be available at the conclusion of this test' biggertext = 'press any key to begin'/> : '' }
 						</div>
 						{this.state.gameOn && this.state.restart ? <CardArea 
 							restartCallback = {this.restartGame} 
